@@ -13,12 +13,13 @@ exception BadContinuationToken { 1: string reason }
 exception BadNotificationTemplateState { 1: string reason }
 
 struct NotificationTemplate {
-    1: required NotificationTemplateId id
+    1: required NotificationTemplateId template_id
     2: required string title
     3: required base.Timestamp created_at
     4: optional base.Timestamp updated_at
     5: required NotificationTemplateState state
-    6: optional NotificationTemplateDistributionDetails distribution_details
+    6: required Base64 content,
+    7: optional NotificationTemplateDistributionDetails distribution_details
 }
 
 struct NotificationTemplateDistributionDetails {
@@ -37,12 +38,12 @@ enum NotificationStatus {
 }
 
 struct Party {
-    1: required PartyID id
+    1: required PartyID party_id
     2: required string name
 }
 
 struct PartyNotification {
-    1: required NotificationTemplateId id
+    1: required NotificationTemplateId template_id
     2: required Party party
     3: required NotificationStatus status
 }
@@ -91,7 +92,7 @@ struct NotificationTemplateCreateRequest {
 }
 
 struct NotificationTemplateModifyRequest {
-    1: required NotificationTemplateId id
+    1: required NotificationTemplateId template_id
     2: optional string title
     3: optional Base64 content
 }
