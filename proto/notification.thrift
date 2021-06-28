@@ -63,7 +63,7 @@ struct RangeDateFilter {
 }
 
 struct NotificationTemplatePartyRequest {
-    1: required NotificationTemplateId id
+    1: required NotificationTemplateId template_id
     2: optional NotificationStatus status
     3: optional ContinuationToken continuation_token
     4: optional i32 limit
@@ -76,13 +76,14 @@ struct NotificationTemplatePartyResponse {
 
 struct NotificationTemplateSearchRequest {
     1: optional string title
-    2: optional DateFilter date
-    3: optional ContinuationToken continuation_token
-    4: optional i32 limit
+    2: optional string content
+    3: optional DateFilter date
+    4: optional ContinuationToken continuation_token
+    5: optional i32 limit
 }
 
 struct NotificationTemplateSearchResponse {
-    1: required list<NotificationTemplate> result
+    1: required list<NotificationTemplate> notification_templates
     2: optional ContinuationToken continuation_token
 }
 
@@ -132,8 +133,14 @@ service NotificationService {
 
     /* Отправка уведомления выбранным мерчантам */
     void sendNotification(1: NotificationTemplateId template_id, 2: list<PartyID> party_ids)
+            throws (
+                1: NotificationTemplateNotFound ex1,
+            )
 
     /* Отправка уведомления для всех мерчантов */
     void sendNotificationAll(1: NotificationTemplateId template_id)
+            throws (
+                1: NotificationTemplateNotFound ex1,
+            )
 
 }
