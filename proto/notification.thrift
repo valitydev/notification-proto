@@ -28,7 +28,12 @@ struct NotificationTemplateDistributionDetails {
 }
 
 enum NotificationTemplateState {
+    /* Состояние при котором возможно производить изменения в notification template */
     draft_state
+    /*
+       Состояние после которого невозможно модифицировать notification template.
+       К примеру, после отправки нотификаций
+    */
     final_state
 }
 
@@ -39,7 +44,6 @@ enum NotificationStatus {
 
 struct Party {
     1: required PartyID party_id
-    2: required string name
 }
 
 struct PartyNotification {
