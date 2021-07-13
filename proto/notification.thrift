@@ -3,7 +3,6 @@ include "base.thrift"
 namespace java com.rbkmoney.notification
 namespace erlang notification
 
-typedef string Base64
 typedef string ContinuationToken
 typedef base.ID PartyID
 typedef base.ID NotificationTemplateId
@@ -18,7 +17,7 @@ struct NotificationTemplate {
     3: required base.Timestamp created_at
     4: optional base.Timestamp updated_at
     5: required NotificationTemplateState state
-    6: required Base64 content,
+    6: required NotificationContent content,
     7: optional NotificationTemplateDistributionDetails distribution_details
 }
 
@@ -91,15 +90,21 @@ struct NotificationTemplateSearchResponse {
     2: optional ContinuationToken continuation_token
 }
 
+struct NotificationContent {
+    1: required string text
+    // Пример, text/markdown; charset=UTF-8
+    2: optional string content_type
+}
+
 struct NotificationTemplateCreateRequest {
     1: required string title
-    2: required Base64 content
+    2: required NotificationContent content
 }
 
 struct NotificationTemplateModifyRequest {
     1: required NotificationTemplateId template_id
     2: optional string title
-    3: optional Base64 content
+    3: optional NotificationContent content
 }
 
 service NotificationService {
