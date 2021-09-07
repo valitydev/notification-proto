@@ -43,12 +43,14 @@ enum NotificationStatus {
 
 struct Party {
     1: required PartyID party_id
+    2: required string email
 }
 
 struct PartyNotification {
     1: required NotificationTemplateId template_id
     2: required Party party
     3: required NotificationStatus status
+    4: required base.Timestamp created_at
 }
 
 union DateFilter {
