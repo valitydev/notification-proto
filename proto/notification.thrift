@@ -53,16 +53,7 @@ struct PartyNotification {
     4: required base.Timestamp created_at
 }
 
-union DateFilter {
-    1: FixedDateFilter fixed_date_filter
-    2: RangeDateFilter range_date_filter
-}
-
-struct FixedDateFilter {
-    1: required base.Timestamp date
-}
-
-struct RangeDateFilter {
+struct DateFilter {
     1: required base.Timestamp from_date
     2: required base.Timestamp to_date
 }
@@ -82,7 +73,7 @@ struct NotificationTemplatePartyResponse {
 struct NotificationTemplateSearchRequest {
     1: optional string title
     2: optional string content
-    3: optional DateFilter date
+    3: optional DateFilter date_filter
     4: optional ContinuationToken continuation_token
     5: optional i32 limit
 }
@@ -107,6 +98,22 @@ struct NotificationTemplateModifyRequest {
     1: required NotificationTemplateId template_id
     2: optional string title
     3: optional NotificationContent content
+}
+
+union PartyFilter {
+    1: PartyID party_id
+    2: string email
+}
+
+struct PartyNotificationRequest {
+    1: required PartyFilter party_filter
+    2: optional DateFilter date_filter
+    3: optional ContinuationToken continuation_token
+}
+
+struct PartyNotificationResponse {
+    1: required list<PartyNotification> parties
+    2: optional ContinuationToken continuation_token
 }
 
 service NotificationService {
@@ -138,6 +145,11 @@ service NotificationService {
 
     /* Поиск шаблонов уведомлений */
     NotificationTemplateSearchResponse findNotificationTemplates(1: NotificationTemplateSearchRequest notification_search_request)
+            throws (
+                1: BadContinuationToken ex1
+            )
+
+    PartyNotificationResponse findPartyNotifications(1: PartyNotificationRequest party_notification_request)
             throws (
                 1: BadContinuationToken ex1
             )
