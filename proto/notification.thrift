@@ -16,9 +16,10 @@ struct NotificationTemplate {
     2: required string title
     3: required base.Timestamp created_at
     4: optional base.Timestamp updated_at
-    5: required NotificationTemplateState state
-    6: required NotificationContent content,
-    7: optional NotificationTemplateDistributionDetails distribution_details
+    5: optional base.Timestamp sent_at
+    6: required NotificationTemplateState state
+    7: required NotificationContent content,
+    8: optional NotificationTemplateDistributionDetails distribution_details
 }
 
 struct NotificationTemplateDistributionDetails {
@@ -73,9 +74,10 @@ struct NotificationTemplatePartyResponse {
 struct NotificationTemplateSearchRequest {
     1: optional string title
     2: optional string content
-    3: optional DateFilter date_filter
-    4: optional ContinuationToken continuation_token
-    5: optional i32 limit
+    3: optional DateFilter created_date_filter
+    4: optional DateFilter sent_date_filter
+    5: optional ContinuationToken continuation_token
+    6: optional i32 limit
 }
 
 struct NotificationTemplateSearchResponse {
@@ -133,6 +135,11 @@ service NotificationService {
             )
 
     NotificationTemplate getNotificationTemplate(1: NotificationTemplateId template_id)
+            throws (
+                1: NotificationTemplateNotFound ex1
+            )
+
+    void removeNotificationTemplate(1: NotificationTemplateId template_id)
             throws (
                 1: NotificationTemplateNotFound ex1
             )
