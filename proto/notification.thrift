@@ -8,6 +8,7 @@ typedef base.ID PartyID
 typedef base.ID NotificationTemplateId
 
 exception NotificationTemplateNotFound {}
+exception PartyIdNotFound { 1: PartyID partyId }
 exception BadContinuationToken { 1: string reason }
 exception BadNotificationTemplateState { 1: string reason }
 
@@ -165,6 +166,7 @@ service NotificationService {
     void sendNotification(1: NotificationTemplateId template_id, 2: list<PartyID> party_ids)
             throws (
                 1: NotificationTemplateNotFound ex1,
+                2: PartyIdNotFound ex2,
             )
 
     /* Отправка уведомления для всех мерчантов */
