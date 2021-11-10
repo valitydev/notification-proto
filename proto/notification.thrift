@@ -53,6 +53,7 @@ struct PartyNotification {
     2: required Party party
     3: required NotificationStatus status
     4: required base.Timestamp created_at
+    5: required bool deleted
 }
 
 struct DateFilter {
@@ -108,9 +109,14 @@ union PartyFilter {
     2: string email
 }
 
+struct DeleteFilter {
+    1: bool is_deleted
+}
+
 struct PartyNotificationRequest {
     1: required PartyFilter party_filter
     2: optional DateFilter date_filter
+    4: optional DeleteFilter delete_filter
     3: optional ContinuationToken continuation_token
 }
 
