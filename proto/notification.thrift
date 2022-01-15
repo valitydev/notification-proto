@@ -1,6 +1,6 @@
 include "base.thrift"
 
-namespace java com.rbkmoney.notification
+namespace java dev.vality.notification
 namespace erlang notification
 
 typedef string ContinuationToken

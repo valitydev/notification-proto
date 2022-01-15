@@ -1,4 +1,4 @@
-namespace java com.rbkmoney.notification.base
+namespace java dev.vality.notification.base
 
 /** Идентификатор */
 typedef string ID
