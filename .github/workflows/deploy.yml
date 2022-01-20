@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    uses: valitydev/base-workflow/.github/workflows/maven-thrift-deploy.yml@master
+    uses: valitydev/base-workflow/.github/workflows/maven-thrift-deploy.yml@ee4d3685b05e8cf5440a60e9c76fba8522795ebb
     with:
       server-username: ${{ secrets.OSSRH_USERNAME }}
       server-password: ${{ secrets.OSSRH_TOKEN }}
