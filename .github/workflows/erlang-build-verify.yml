@@ -1,0 +1,10 @@
+name: Erlang Build And Verify
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    uses: valitydev/base-workflow/.github/workflows/erlang-thrift-build.yml@v1.0.0
