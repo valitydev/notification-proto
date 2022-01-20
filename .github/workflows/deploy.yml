@@ -1,4 +1,4 @@
-name: Deploy Artifact
+name: Maven Deploy Artifact
 
 on:
   push:
