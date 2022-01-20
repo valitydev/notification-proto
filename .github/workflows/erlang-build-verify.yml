@@ -7,4 +7,4 @@ on:
 
 jobs:
   build:
-    uses: valitydev/base-workflow/.github/workflows/erlang-thrift-build.yml@5887af1d77791c8be93981b10f36a6f9d35fc630
+    uses: valitydev/base-workflow/.github/workflows/erlang-thrift-build.yml@v1.0.0
