@@ -1,14 +1,14 @@
-name: Maven Deploy Artifact
+name: Java deploy
 
 on:
   push:
     branches:
-      - 'master'
-      - 'main'
+      - "master"
+      - "main"
 
 jobs:
   deploy:
-    uses: valitydev/base-workflow/.github/workflows/maven-thrift-deploy.yml@v2-beta
+    uses: valitydev/java-workflow/.github/workflows/maven-thrift-deploy.yml@v2
     secrets:
       server-username: ${{ secrets.OSSRH_USERNAME }}
       server-password: ${{ secrets.OSSRH_TOKEN }}
