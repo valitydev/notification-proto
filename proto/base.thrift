@@ -16,5 +16,5 @@ typedef string Timestamp
  */
 exception InvalidRequest {
     /** Список пригодных для восприятия человеком ошибок во входных данных */
-    1: required list<string> errors
+    1: required list<string> errorss
 }
